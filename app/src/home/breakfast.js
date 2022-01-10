@@ -173,10 +173,8 @@ const breakfast = ({ navigation }) => {
                                 for( let index=0;index<tempcart.length;index++){
                                     if (tempcart[index]._id == obj._id) {
                                         tempcart[index].count=tempcart[index].count+1;
-                                        // await setCart(tempcart)
                                     }
                                     else{
-                                        // console.log(tempcart)
                                         tempcart.push(obj)
                                     }
                                 }

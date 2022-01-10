@@ -59,10 +59,11 @@ const login = ({navigation}) => {
             <TouchableOpacity 
             style={styles.loginBtn} 
             onPress={getuserdata}
+            onPress={()=>{navigation.navigate('home')
+                ToastAndroid.showWithGravityAndOffset("Welcome to Food Service Application.", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);}}
                 >
                 <Text style={styles.loginText} 
-                onPress={()=>{navigation.navigate('home')
-                ToastAndroid.showWithGravityAndOffset("Welcome to Food Service Application.", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);}}>LOGIN</Text>
+                >LOGIN</Text>
             </TouchableOpacity>
         </View>
     );

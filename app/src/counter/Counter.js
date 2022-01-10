@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput,FlatList } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { increment, decrement } from "./Actions";
 
 
-const Counter = (props,{ route, navigation }) => {
-  const[cart,setCart]=useState(props.route.params.paramKey)
+const Counter = (props, {navigation, route}) => {
+  const [cart, setCart] = useState(props.route.params.paramKey)
   const data = useSelector(state => state);
   const dispatch = useDispatch();
-  // console.log(JSON.stringify(cart))
-// console.log("Data" + JSON.stringify(props.route.params.paramKey))
   return (
-    // <SafeAreaView style={styles.background}>
     <View style={styles.container}>
       <View style={styles.header}>
         <View>
@@ -33,38 +30,33 @@ const Counter = (props,{ route, navigation }) => {
 
       <View style={styles.boundary} />
       <View style={styles.body}>
-        <View><Text style={styles.heading}>Your Cart</Text></View>
-        {/* <Text>
-          {props.route.params.paramKey}
-        </Text>
-        <Pressable onPress={() => dispatch(increment())}>
-          <Text>+</Text>
-        </Pressable>
-        <Text>{data.counter}</Text>
-        <Pressable onPress={() => dispatch(decrement())}>
-          <Text>-</Text>
-        </Pressable> */}
-        {cart!=undefined && <FlatList 
-        data={cart} 
-        renderItem= {({item}) => 
-          <View>
-            <Text>{item.name}</Text>
-            <Text>{item.desc}</Text>
-            <Text>{item.price}</Text>
-            <Text>{item.discount}</Text>
-            <Text>{item.count}</Text>
-          </View>
-        }/>}
+        <View>
+          <Text style={styles.heading}>Your Cart</Text>
+        </View>
+        {cart != undefined && <FlatList
+          data={cart}
+          renderItem={({ item }) =>
+            <View style={styles.data}>
+              <TouchableOpacity style={styles.foodstyles}>
+                <View style={styles.contentstyle}>
+                  <Text style={styles.textstyle}>Name: {item.name}</Text>
+                  <Text style={styles.descriptionstyle}>Description: {item.desc}</Text>
+                  <Text style={styles.pricestyle}>Price: {item.price}</Text>
+                  <Text style={styles.discountstyle}>Discount: {item.discount}</Text>
+                  <Text style={styles.quantitystyle}>Quantity: {item.count}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          } />}
       </View>
 
       <View style={styles.footer}>
-        <TouchableOpacity onPress={()=> {navigation.navigate('Success')}}>
+        <TouchableOpacity onPress={() => { navigation.navigate('Success') }}>
           <Text style={styles.footertextstyle}>Place Your Order</Text>
         </TouchableOpacity>
       </View>
     </View>
 
-    // </SafeAreaView>
   );
 
 };
@@ -72,20 +64,29 @@ const Counter = (props,{ route, navigation }) => {
 export default Counter;
 
 const styles = StyleSheet.create({
-  // background: {
-  //   flex: 1,
-  // },
+
   container: {
     flex: 1,
 
+  },
+  data: {
+    margin: 5,
   },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
   },
+  contentstyle: {
+    margin: 10
+  },
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
+  },
+  quantitystyle:{
+    color:'black',
+    fontSize:20,
+
   },
   sectionDescription: {
     marginTop: 8,
@@ -106,6 +107,12 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 10
   },
+  foodstyles: {
+    flexDirection: 'row',
+    borderColor: "black",
+    borderWidth: 1,
+    width: 395
+  },
   searchbar: {
     marginLeft: 20,
     marginTop: 5,
@@ -116,6 +123,28 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     alignItems: "center"
+  },
+  textstyle: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20,
+    // textDecorationLine: 'underline',
+  },
+  descriptionstyle: {
+    margin: 5,
+    width: 200,
+    color: 'black',
+  },
+  pricestyle: {
+    margin: 10,
+    color: 'black',
+    fontSize: 20
+  },
+  discountstyle: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20,
+    margin: 10
   },
   cartimg: {
     marginLeft: 10,
@@ -136,17 +165,16 @@ const styles = StyleSheet.create({
     width: 150,
     marginLeft: 150
   },
-  footer:{
-    backgroundColor:'orange',
-    borderColor:'black',
-    borderWidth:1,
-    marginTop:630
+  footer: {
+    backgroundColor: 'orange',
+    borderColor: 'black',
+    borderWidth: 1,
   },
-  footertextstyle:{
-    color:'black',
-    fontSize:30,
-    height:40,
-    marginLeft:120,
-    marginTop:10,
+  footertextstyle: {
+    color: 'black',
+    fontSize: 30,
+    height: 40,
+    marginLeft: 120,
+    marginTop: 10,
   }
 });

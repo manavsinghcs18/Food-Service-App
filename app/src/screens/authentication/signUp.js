@@ -112,10 +112,11 @@ const signUp = ({navigation}) => {
             <TouchableOpacity
                 style={styles.signupBtn}
                 onPress={setuserdata}
+                onPress={()=>{navigation.navigate('Login')
+                ToastAndroid.showWithGravityAndOffset("You are successfully signedup", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);}}
             >
                 <Text style={styles.loginText}
-                onPress={()=>{navigation.navigate('Login')
-                ToastAndroid.showWithGravityAndOffset("You are successfully signedup", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);}}>Signup</Text>
+                >Signup</Text>
             </TouchableOpacity>
         </View>
     );
